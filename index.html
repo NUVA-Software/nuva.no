@@ -3,8 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>NUVA Software</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NUVA — Technology agency</title>
+    <meta property="og:title" content="NUVA — Technology agency" />
+    <meta
+      name="description"
+      content="NUVA Software is a technology agency that specializes in building tailormade software and hardware, for specific industry needs."
+    />
+    <meta
+      property="og:description"
+      content="NUVA Software is a technology agency that specializes in building tailormade software and hardware, for specific industry needs."
+    />
+    <meta property="og:image" content="/image.jpg" />
+    <meta property="og:url" content="https://nuva.no" />
+    <meta property="og:type" content="website" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
+    <meta name="msapplication-TileColor" content="#f1f5f9" />
+    <meta name="theme-color" content="#f1f5f9" />
+    <script src="/scripts/tailwind.js"></script>
+    <script src="/tailwind.config.js"></script>
     <style>
       *,
       *::before,
@@ -15,90 +36,84 @@
         min-width: 0;
       }
 
-      body {
-        font-size: 24px;
-        line-height: 1.5;
-        color: #333;
-        background-color: #f0f0f0;
+      html {
+        font-size: 20px;
+      }
+      @font-face {
+        font-family: "Butler";
+        src: url("/fonts/butler_bold-webfont.woff2") format("woff2"),
+          url("/fonts/butler_bold-webfont.woff") format("woff");
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Butler";
+        src: url("/fonts/butler_light-webfont.woff2") format("woff2"),
+          url("/fonts/butler_light-webfont.woff") format("woff");
         font-weight: 300;
-      }
-
-      main {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem;
-        font-family: sans-serif;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: serif;
-        font-weight: 400;
-      }
-
-      .hero {
-        font-family: monospace;
-        text-align: center;
-        padding: 5rem 0;
-      }
-
-      .hero h1 {
-        font-family: inherit;
-      }
-
-      .spacer-lg {
-        padding: 2rem 0;
-      }
-
-      .spacer-md {
-        padding: 1rem 0;
-      }
-
-      .spacer-sm {
-        padding: 0.5rem 0;
-      }
-
-      ul {
-        padding-left: 1.5rem;
-      }
-
-      .small {
-        font-size: 0.8em;
+        font-style: normal;
       }
     </style>
   </head>
-  <body>
-    <main>
-      <div class="hero">
-        <h1>NUVA Software</h1>
+  <body
+    class="relative overflow-x-hidden bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 font-light selection:bg-blue-700 selection:text-white"
+  >
+    <main class="overflow-hidden">
+      <section class="relative h-[50vh] sm:h-[66vh] max-h-full min-h-[15rem] flex flex-col">
+        <div class="mt-auto pt-16 px-8 sm:px-16 md:px-32 max-w-full lg:w-[80ch] text-center sm:text-left">
+          <h1 class="font-serif font-light text-8xl sm:text-9xl lg:text-[10rem]">NUVA</h1>
+          <p class="mt-4 md:mt-8">
+            We are a technology agency that specializes in building tailormade software and hardware, for spesific
+            industry needs.
+          </p>
+        </div>
+        <img
+          class="dark:hidden block absolute left-[10vw] md:left-[15vw] -top-[50vw] md:-top-[33vw] w-[300vw] md:w-[150vw] h-auto max-w-none pointer-events-none -z-[2] motion-safe:animate-[spin_30s_linear_infinite]"
+          src="/images/nuva-gradient-bg-min.webp"
+          alt=""
+        />
+        <img
+          class="light:hidden dark:block absolute left-[10vw] md:left-[15vw] -top-[50vw] md:-top-[33vw] w-[300vw] md:w-[150vw] h-auto max-w-none pointer-events-none -z-[2] motion-safe:animate-[spin_30s_linear_infinite]"
+          src="/images/nuva-gradient-bg-min-dark.webp"
+          alt=""
+        />
+        <div
+          class="absolute left-[10vw] md:left-[15vw] -top-[50vw] md:-top-[33vw] w-[300vw] md:w-[150vw] h-[300vw] md:h-[150vw] max-w-none pointer-events-none -z-[1] mix-blend-soft-light dark:mix-blend-darken rounded-full p-[15vw] bg-[url('/images/512-25-100-monochrome.png')] bg-repeat bg-auto bg-center"
+        ></div>
+      </section>
+      <div class="lg:w-[80ch]">
+        <div class="text-center">
+          <div class="mt-16 mx-auto w-px h-64 bg-current"></div>
+          <h2 class="mt-4 mx-auto font-light font-serif text-3xl">Our solutions</h2>
+          <div class="mt-4 mx-auto w-px h-32 bg-current"></div>
+        </div>
+        <section class="p-4 sm:p-8 md:px-16">
+          <ul class="flex flex-col gap-4 md:gap-8">
+            <li>
+              <h3 class="font-bold font-serif text-xl">Sauna Booking</h3>
+              <p>
+                <a
+                  href="https://saunabooking.no"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-blue-700 dark:text-blue-400 underline"
+                  >saunabooking.no</a
+                >
+              </p>
+            </li>
+            <li>
+              <h3 class="font-bold font-serif text-xl">Cafe &amp; Restaurant membership app</h3>
+              <p>More information coming soon</p>
+            </li>
+          </ul>
+        </section>
+        <div class="mb-4 w-full h-px bg-current"></div>
+        <footer class="text-center px-4 py-16 w-96 mx-auto text-stone-500 text-xs flex flex-col gap-8 max-w-full">
+          <p>NUVA Software is a collaboration between Datahjelpen AS, Fjorden Web AS, and Jevnaker Consulting.</p>
+          <p>Made with ❤️ and ☕️ in Sandefjord, Norway</p>
+        </footer>
       </div>
-      <p>
-        NUVA Software is a technology agency that specializes in building software and hardware that is tailormade for
-        spesific industry needs.
-      </p>
-      <div class="spacer-lg"></div>
-      <h2>Our solutions</h2>
-      <div class="spacer-sm"></div>
-      <ul>
-        <li>
-          <h3>Sauna Booking</h3>
-          <p>More information coming soon</p>
-          <div class="spacer-sm"></div>
-        </li>
-        <li>
-          <h3>Cafe &amp; Restaurant membership app</h3>
-          <p>More information coming soon</p>
-          <div class="spacer-sm"></div>
-        </li>
-      </ul>
-      <div class="spacer-lg"></div>
-      <p class="small">
-        NUVA Software is a collaboration between Datahjelpen AS, Fjorden Web AS, and Jevnaker Consulting.
-      </p>
     </main>
   </body>
 </html>
