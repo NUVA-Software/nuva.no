@@ -130,11 +130,29 @@ jobs:
                 labels:
                   app: $deployment_name
               spec:
+                imagePullSecrets:
+                  - name: regcred
                 containers:
                 - name: ${deployment_name:0:63}
                   image: $image_name_with_tag
-                imagePullSecrets:
-                - name: regcred
+                  startupProbe:
+                    httpGet:
+                      path: /
+                      port: 80
+                    initialDelaySeconds: 5
+                    periodSeconds: 10
+                  readinessProbe:
+                    httpGet:
+                      path: /
+                      port: 80
+                    initialDelaySeconds: 5
+                    periodSeconds: 10
+                  livenessProbe:
+                    httpGet:
+                      path: /
+                      port: 80
+                    initialDelaySeconds: 5
+                    periodSeconds: 10
           ---
           apiVersion: v1
           kind: Service
@@ -158,11 +176,12 @@ jobs:
             ingressClassName: nginx
             tls:
             - hosts:
+              - nuva.no
               - $deployment_name.dev.nuva.no
               secretName: $deployment_name-tls
             rules:
-            - host: $deployment_name.dev.nuva.no
-              http:
+            - host: nuva.no
+              http: &http_rules
                 paths:
                 - path: /
                   pathType: Prefix
@@ -171,6 +190,8 @@ jobs:
                       name: $deployment_name
                       port:
                         number: 80
+            - host: $deployment_name.dev.nuva.no
+              http: *http_rules
           ---
           apiVersion: cert-manager.io/v1
           kind: Certificate
@@ -183,6 +204,7 @@ jobs:
               name: letsencrypt-prod
               kind: ClusterIssuer
             dnsNames:
+              - nuva.no
               - $deployment_name.dev.nuva.no
           EOF
           kubectl rollout status deployment/$deployment_name --namespace=${{ env.K8S_NAMESPACE }}
