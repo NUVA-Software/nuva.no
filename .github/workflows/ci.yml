@@ -1,0 +1,188 @@
+name: Build and deploy
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  push:
+    branches: ["main"]
+    # Publish semver tags as releases.
+    tags: ["v*.*.*"]
+  pull_request:
+    branches: ["main"]
+
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+  K8S_NAMESPACE: development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Install the cosign tool except on PR
+      # https://github.com/sigstore/cosign-installer
+      - name: Install cosign
+        if: github.event_name != 'pull_request'
+        uses: sigstore/cosign-installer@6e04d228eb30da1757ee4e1dd75a0ec73a653e06 #v3.1.1
+        with:
+          cosign-release: "v2.1.1"
+
+      # Set up BuildKit Docker container builder to be able to build
+      # multi-platform images and export cache
+      # https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
+
+      # Login against a Docker registry except on PR
+      # https://github.com/docker/login-action
+      - name: Log into registry ${{ env.REGISTRY }}
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Extract metadata (tags, labels) for Docker
+      # https://github.com/docker/metadata-action
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      # Build and push Docker image with Buildx (don't push on PR)
+      # https://github.com/docker/build-push-action
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Sign the resulting Docker image digest except on PRs.
+      # This will only write to the public Rekor transparency log when the Docker
+      # repository is public to avoid leaking data.  If you would like to publish
+      # transparency data even for private images, pass --force to cosign below.
+      # https://github.com/sigstore/cosign
+      - name: Sign the published Docker image
+        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
+          TAGS: ${{ steps.meta.outputs.tags }}
+          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+        # This step uses the identity token to provision an ephemeral certificate
+        # against the sigstore community Fulcio instance.
+        run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+
+      - name: Set up Kubeconfig
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+        run: |
+          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 -d > kubeconfig
+          echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV
+
+      - name: Update Kubernetes Deployment
+        env:
+          KUBECONFIG: ${{ env.KUBECONFIG}}
+        run: |
+          image_name_with_tag="${{ steps.meta.outputs.tags }}@${{ steps.build-and-push.outputs.digest }}"
+          deployment_name=$(echo "${{ github.repository }}" | sed -e 's/[^a-zA-Z0-9-]/-/g' | sed 's/NUVA-Software/nuva/' | cut -c1-63 | tr '[:upper:]' '[:lower:]')
+          kubectl create secret generic regcred --from-file=.dockerconfigjson=${HOME}/.docker/config.json --type=kubernetes.io/dockerconfigjson --namespace=${{ env.K8S_NAMESPACE }} --dry-run=client -o yaml | kubectl apply -f -
+          cat <<EOF | kubectl apply -f -
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: $deployment_name
+            namespace: ${{ env.K8S_NAMESPACE }}
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: $deployment_name
+            template:
+              metadata:
+                labels:
+                  app: $deployment_name
+              spec:
+                containers:
+                - name: ${deployment_name:0:63}
+                  image: $image_name_with_tag
+                imagePullSecrets:
+                - name: regcred
+          ---
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: $deployment_name
+            namespace: ${{ env.K8S_NAMESPACE }}
+          spec:
+            selector:
+              app: $deployment_name
+            ports:
+            - protocol: TCP
+              port: 80
+              targetPort: 80
+          ---
+          apiVersion: networking.k8s.io/v1
+          kind: Ingress
+          metadata:
+            name: $deployment_name
+            namespace: ${{ env.K8S_NAMESPACE }}
+          spec:
+            ingressClassName: nginx
+            tls:
+            - hosts:
+              - $deployment_name.dev.nuva.no
+              secretName: $deployment_name-tls
+            rules:
+            - host: $deployment_name.dev.nuva.no
+              http:
+                paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: $deployment_name
+                      port:
+                        number: 80
+          ---
+          apiVersion: cert-manager.io/v1
+          kind: Certificate
+          metadata:
+            name: $deployment_name
+            namespace: ${{ env.K8S_NAMESPACE }}
+          spec:
+            secretName: $deployment_name-tls
+            issuerRef:
+              name: letsencrypt-prod
+              kind: ClusterIssuer
+            dnsNames:
+              - $deployment_name.dev.nuva.no
+          EOF
+          kubectl rollout status deployment/$deployment_name --namespace=${{ env.K8S_NAMESPACE }}

@@ -1,0 +1,11 @@
+{
+  "name": "nuva.no",
+  "scripts": {
+    "start": "browser-sync start --server 'public' --files \"public/**\""
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "dependencies": {
+    "browser-sync": "^3.0.2"
+  }
+}

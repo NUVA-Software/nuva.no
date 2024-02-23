@@ -4,5 +4,5 @@
 
 ## Develop
 
-1. Run `npx -y browser-sync --files *.html`
+1. Run `bunx -y browser-sync --files public/*.html`
 2. Open `http://localhost:3000`
