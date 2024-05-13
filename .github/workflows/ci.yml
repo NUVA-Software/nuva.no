@@ -135,6 +135,10 @@ jobs:
                 containers:
                 - name: ${deployment_name:0:63}
                   image: $image_name_with_tag
+                  resources:
+                    requests:
+                        memory: "128Mi"
+                        cpu: "10m"
                   startupProbe:
                     httpGet:
                       path: /
