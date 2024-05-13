@@ -137,7 +137,7 @@ jobs:
                   image: $image_name_with_tag
                   resources:
                     requests:
-                        memory: "128Mi"
+                        memory: "64Mi"
                         cpu: "10m"
                   startupProbe:
                     httpGet:
