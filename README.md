@@ -4,5 +4,8 @@
 
 ## Develop
 
-1. Run `bunx -y browser-sync --files public/*.html`
-2. Open `http://localhost:3000`
+Start and connect to the docker container
+
+1. Run `bun install`
+2. Run `bun start`
+3. Open `http://localhost:3000`

@@ -1,0 +1,12 @@
+services:
+    nuva-no:
+        network_mode: host
+        container_name: nuva-no
+        build:
+            context: .
+            dockerfile: Dockerfile.local
+        ports:
+            - "3000:3000"
+        volumes:
+            - ../:/app
+        tty: true
