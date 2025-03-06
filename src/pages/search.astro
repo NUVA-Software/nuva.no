@@ -1,0 +1,106 @@
+---
+import { readdirSync } from "fs";
+import { resolve } from "path";
+
+import Card from "../components/dumb/Card.astro";
+import ContentSection from "../components/dumb/ContentSection.astro";
+import Layout from "../layouts/Layout.astro";
+
+// Disable prerendering (SSG) and enable SSR for this page
+export const prerender = false;
+
+const url = new URL(Astro.request.url);
+const search = url.searchParams.get("q") ?? "";
+
+export function getRootRoutes() {
+    if (process.env.NODE_ENV === "production") {
+        return [];
+    }
+
+    const pagesDir = resolve("./src/pages");
+    const files = readdirSync(pagesDir);
+
+    return files
+        .filter((file) => file.endsWith(".astro"))
+        .filter((file) => {
+            let path = file.replace(".astro", "");
+
+            if (path === "search") {
+                return false;
+            } else if (path === "app") {
+                return false;
+            }
+
+            return true;
+        })
+        .map((file) => {
+            let path = file.replace(".astro", "");
+            let title = path.replace("-", " ");
+
+            if (path === "index") {
+                path = "/";
+                title = "Home";
+            }
+
+            return {
+                path,
+                title,
+            };
+        });
+}
+
+const pagesSearchResults = getRootRoutes().reduce((acc, page) => {
+    if (
+        page.title.toLowerCase().includes(search.toLowerCase()) ||
+        page.path.toLowerCase().includes(search.toLowerCase())
+    ) {
+        // @ts-ignore
+        acc.push(page);
+    }
+    return acc;
+}, []);
+---
+
+<Layout title={`${search} | Søk`}>
+    <main class="relative max-w-full overflow-x-hidden min-h-screen">
+        <header class="pt-16 flex flex-col gap-8 items-center relative w-full max-w-screen-2xl mx-auto">
+            <div class="w-full px-4 lg:px-8">
+                <h1
+                    class="font-bold flex flex-col lg:flex-row lg:gap-4 text-5xl sm:text-7xl font-serif leading-none text-left"
+                >
+                    <span>Søk: {search}</span>
+                </h1>
+            </div>
+        </header>
+
+        <ContentSection className="pb-16">
+            {
+                pagesSearchResults.length > 0 && (
+                    <section>
+                        <h2 class="text-3xl font-serif font-bold pb-2 pt-12">Sider</h2>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-8 relative">
+                            {(
+                                pagesSearchResults as {
+                                    path: string;
+                                    title: string;
+                                }[]
+                            )
+                                .toSorted((a, b) => a.title.localeCompare(b.title))
+                                .map((page) => (
+                                    <article>
+                                        <Card>
+                                            <a href={page.path} class="flex flex-col gap-2 group">
+                                                <h2 class="font-bold font-serif text-2xl leading-none mt-1 mb-2 group-hover:underline group-focus:underline capitalize">
+                                                    {page.title}
+                                                </h2>
+                                            </a>
+                                        </Card>
+                                    </article>
+                                ))}
+                        </div>
+                    </section>
+                )
+            }
+        </ContentSection>
+    </main>
+</Layout>

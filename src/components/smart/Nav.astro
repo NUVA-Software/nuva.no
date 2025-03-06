@@ -1,0 +1,284 @@
+---
+// import logoDark from "../../../public/images/saunabooking-logo-dark-t.svg?raw";
+// import logoLight from "../../../public/images/saunabooking-logo-light-t.svg?raw";
+import Button from "../dumb/Button.astro";
+import Icon from "../dumb/Icon.astro";
+import { Menu, Search, X, Sun, Moon } from "lucide";
+---
+
+<nav id="nav" class="font-paragraph">
+    <div class="fixed w-full top-0 right-0 left-0 backdrop-blur-md z-10 border-b border-b-border/10 bg-background/50">
+        <div class="px-4 md:px-8 max-w-screen-2xl mx-auto grid grid-cols-2 md:grid-cols-3">
+            <a
+                href="/"
+                class="py-2 w-full mr-auto flex gap-2 text-foreground items-center justify-start hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+            >
+                <!-- <span class="logo dark:hidden w-8 md:w-10 h-auto block text-current">
+                    <Fragment set:html={logoDark} />
+                </span>
+                <span class="logo hidden dark:block w-8 md:w-10 h-auto text-current">
+                    <Fragment set:html={logoLight} />
+                </span> -->
+                <span>NUVA AS</span>
+            </a>
+            <div class="hidden md:flex gap-4 justify-center items-center">
+                <a
+                    href="/contact"
+                    class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                    >Contact</a
+                >
+                <a
+                    href="/solutions"
+                    class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                    >Solutions</a
+                >
+            </div>
+            <div class="flex gap-4 justify-end items-center">
+                <button
+                    data-theme-toggle-trigger
+                    title="Change theme"
+                    type="button"
+                    class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                >
+                    <Icon class="dark:block hidden text-current" icon={Moon} />
+                    <Icon class="dark:hidden block text-current" icon={Sun} />
+                    <span class="hidden xl:block">Theme</span>
+                </button>
+                <button
+                    data-search-open-trigger
+                    title="Open search"
+                    type="button"
+                    class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                >
+                    <Icon class="text-current" icon={Search} />
+                    <span class="hidden xl:block">Search</span>
+                </button>
+                <button
+                    data-menu-open-trigger
+                    title="Open menu"
+                    type="button"
+                    class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                >
+                    <Icon class="text-current" icon={Menu} />
+                    <span class="block">Menu</span>
+                </button>
+                <div class="hidden lg:block">
+                    <Button size="sm" variant="primary" href="/contact">Contact</Button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <dialog
+        data-nav-menu
+        class="fixed inset-0 bg-background/50 backdrop-blur-md w-full h-screen z-10 open:flex flex-col justify-center items-center p-4"
+    >
+        <a
+            href="/"
+            class="mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+        >
+            <!-- <span class="logo dark:hidden w-8 md:w-10 h-auto block text-current">
+                <Fragment set:html={logoDark} />
+            </span>
+            <span class="logo hidden dark:block w-8 md:w-10 h-auto text-current">
+                <Fragment set:html={logoLight} />
+            </span> -->
+            <span>NUVA AS</span>
+        </a>
+        <div class="my-auto flex flex-col gap-4 text-center">
+            <a
+                href="/contact"
+                class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                >Contact</a
+            >
+            <a
+                href="/solutions"
+                class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                >Solutions</a
+            >
+            <div>
+                <Button size="md" variant="primary" href="/contact">Contact</Button>
+            </div>
+        </div>
+        <div class="mt-auto">
+            <button
+                data-menu-close-trigger
+                title="Close menu"
+                type="button"
+                class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+            >
+                <Icon class="text-current" icon={X} />
+                <span>Close</span>
+            </button>
+        </div>
+    </dialog>
+    <dialog
+        data-nav-search
+        class="fixed inset-0 bg-background/50 backdrop-blur-md w-full h-screen z-10 open:flex flex-col justify-center items-center p-4"
+    >
+        <a
+            href="/"
+            class="mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+        >
+            <!-- <span class="logo dark:hidden w-8 md:w-10 h-auto block text-current">
+                <Fragment set:html={logoDark} />
+            </span>
+            <span class="logo hidden dark:block w-8 md:w-10 h-auto text-current">
+                <Fragment set:html={logoLight} />
+            </span> -->
+            <span>NUVA AS</span>
+        </a>
+        <form class="my-auto flex gap-2 text-center justify-center items-center" action="/search">
+            <input name="q" type="search" class="p-2 border-2 border-border" autofocus />
+            <button type="submit" class="text-foreground">
+                <Icon class="text-current" icon={Search} />
+            </button>
+        </form>
+        <div class="mt-auto">
+            <button
+                data-search-close-trigger
+                title="Close search"
+                type="button"
+                class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+            >
+                <Icon class="text-current" icon={X} />
+                <span>Close</span>
+            </button>
+        </div>
+    </dialog>
+</nav>
+
+<script>
+    (function () {
+        const nav = document.getElementById("nav");
+
+        if (!nav) {
+            throw new Error("No nav element found");
+        }
+
+        setupMenu(nav);
+        setupSearch(nav);
+        setupTheme();
+    })();
+
+    function setupMenu(nav: HTMLElement) {
+        const navMenuDialog = nav.querySelector("dialog[data-nav-menu]");
+        if (!navMenuDialog) {
+            throw new Error("No dialog element found");
+        }
+
+        const menuOpenButtons = document.querySelectorAll("[data-menu-open-trigger]");
+        menuOpenButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                console.debug("Opening nav menu dialog: Button clicked");
+                navMenuDialog.setAttribute("open", "");
+                // @ts-ignore - Focus method exists, stfu TS
+                navMenuDialog.focus();
+                window.addEventListener("keydown", handleEscapeKey);
+            });
+        });
+
+        const menuCloseButtons = document.querySelectorAll("[data-menu-close-trigger]");
+        menuCloseButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                console.debug("Closing nav menu dialog: Button clicked");
+                navMenuDialog.removeAttribute("open");
+                // @ts-ignore - Focus method exists, stfu TS
+                menuOpenButtons[0].focus();
+                window.removeEventListener("keydown", handleEscapeKey);
+            });
+        });
+
+        const handleEscapeKey = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                console.debug("Closing nav menu dialog: Escape key pressed");
+                navMenuDialog.removeAttribute("open");
+                // @ts-ignore - Focus method exists, stfu TS
+                menuOpenButtons[0].focus();
+                window.removeEventListener("keydown", handleEscapeKey);
+            }
+        };
+    }
+
+    function setupSearch(nav: HTMLElement) {
+        const navSearchDialog = nav.querySelector("dialog[data-nav-search]");
+        if (!navSearchDialog) {
+            throw new Error("No dialog element found");
+        }
+
+        const searchInputElement = navSearchDialog.querySelector("input");
+        if (!searchInputElement) {
+            throw new Error("No input element found");
+        }
+
+        const searchOpenButtons = document.querySelectorAll("[data-search-open-trigger]");
+        searchOpenButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                console.debug("Opening nav search dialog: Button clicked");
+                navSearchDialog.setAttribute("open", "");
+                searchInputElement.focus();
+                window.addEventListener("keydown", handleEscapeKey);
+            });
+        });
+
+        const searchCloseButtons = document.querySelectorAll("[data-search-close-trigger]");
+        searchCloseButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                console.debug("Closing nav search dialog: Button clicked");
+                navSearchDialog.removeAttribute("open");
+                // @ts-ignore - Focus method exists, stfu TS
+                searchOpenButtons[0].focus();
+                window.removeEventListener("keydown", handleEscapeKey);
+            });
+        });
+
+        const handleEscapeKey = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                console.debug("Closing nav search dialog: Escape key pressed");
+                navSearchDialog.removeAttribute("open");
+                // @ts-ignore - Focus method exists, stfu TS
+                searchOpenButtons[0].focus();
+                window.removeEventListener("keydown", handleEscapeKey);
+            }
+        };
+    }
+
+    function setupTheme() {
+        initialize();
+
+        const themeToggleButtons = document.querySelectorAll("[data-theme-toggle-trigger]");
+        themeToggleButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                console.debug("Toggling theme: Button clicked");
+                const savedTheme = localStorage.getItem("theme");
+                applyTheme(savedTheme === "light" ? "dark" : "light");
+            });
+        });
+
+        function initialize() {
+            const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            const savedTheme = localStorage.getItem("theme");
+
+            if (!savedTheme) {
+                localStorage.setItem("theme", preferredTheme);
+                applyTheme(preferredTheme);
+            } else {
+                applyTheme(savedTheme as "light" | "dark");
+            }
+        }
+
+        function applyTheme(theme: "light" | "dark") {
+            console.debug(`Applying theme: ${theme}`);
+            document.documentElement.classList.remove("dark");
+            document.documentElement.classList.remove("light");
+            document.documentElement.classList.add(theme);
+            localStorage.setItem("theme", theme);
+        }
+    }
+</script>
+
+<style is:global>
+    #nav .logo svg {
+        width: 100%;
+        height: auto;
+    }
+</style>
