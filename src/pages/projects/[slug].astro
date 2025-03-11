@@ -1,0 +1,83 @@
+---
+import type { GetStaticPaths } from "astro";
+import Button from "../../components/dumb/Button.astro";
+import ContentSection from "../../components/dumb/ContentSection.astro";
+import Layout from "../../layouts/Layout.astro";
+import { projects } from "../../data/projects";
+
+const { slug } = Astro.params;
+const project = projects.find((project) => project.slug === slug);
+
+export const getStaticPaths = (() => {
+    return projects.map((project) => ({
+        params: { slug: project.slug },
+        props: { project },
+    }));
+}) satisfies GetStaticPaths;
+---
+
+<Layout>
+    <main>
+        {!project && <div>Project not found</div>}
+        {
+            project && (
+                <div class="">
+                    <div class="bg-primary-500 text-white pt-24 pb-8">
+                        <ContentSection className="flex flex-col md:flex-row justify-between md:items-end gap-4">
+                            <div class="w-full max-w-2xl">
+                                <a href="/projects" class="text-white hover:underline">
+                                    <span>&larr;</span>
+                                    <span>Projects</span>
+                                </a>
+                                <h1 class="font-serif font-bold text-4xl md:text-6xl mt-4">{project.title}</h1>
+                                <p class="mt-4">{project.description}</p>
+                                {project.link && (
+                                    <a
+                                        href={project.link}
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="mt-2 text-white underline inline-block"
+                                    >
+                                        {new URL(project.link).origin}
+                                    </a>
+                                )}
+                            </div>
+                            {project.customer && (
+                                <div>
+                                    {!project.customerLink && (
+                                        <p>
+                                            <span class="opacity-50 font-light">Customer: </span>
+                                            <span>{project.customer}</span>
+                                        </p>
+                                    )}
+                                    {project.customerLink && (
+                                        <p>
+                                            <span class="opacity-50 font-light">Customer: </span>
+                                            <a
+                                                href={project.customerLink}
+                                                target="_blank"
+                                                rel="noopener"
+                                                class="hover:text-white hover:underline"
+                                            >
+                                                {project.customer}
+                                            </a>
+                                        </p>
+                                    )}
+                                </div>
+                            )}
+                        </ContentSection>
+                    </div>
+                    <ContentSection>
+                        <div class="w-full max-w-full flex justify-center items-center py-8">
+                            <img
+                                src={project.image}
+                                alt={`${project.title} project image`}
+                                class="rounded-lg shadow-xl"
+                            />
+                        </div>
+                    </ContentSection>
+                </div>
+            )
+        }
+    </main>
+</Layout>

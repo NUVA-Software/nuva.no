@@ -8,7 +8,7 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
 
 <nav id="nav" class="font-paragraph">
     <div class="fixed w-full top-0 right-0 left-0 backdrop-blur-md z-10 border-b border-b-border/10 bg-background/50">
-        <div class="px-4 md:px-8 max-w-screen-2xl mx-auto grid grid-cols-2 md:grid-cols-3">
+        <div class="px-4 md:px-8 max-w-screen-2xl mx-auto grid grid-cols-2 md:grid-cols-5">
             <a
                 href="/"
                 class="py-2 w-full mr-auto flex gap-2 text-foreground items-center justify-start hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
@@ -19,21 +19,26 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
                 <span class="logo hidden dark:block w-8 md:w-10 h-auto text-current">
                     <Fragment set:html={logoLight} />
                 </span> -->
-                <span>NUVA AS</span>
+                <span class="font-serif font-bold text-2xl">NUVA</span>
             </a>
-            <div class="hidden md:flex gap-4 justify-center items-center">
+            <div class="hidden md:flex gap-4 justify-start items-center md:col-span-2">
+                <a
+                    href="/projects"
+                    class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                    >Projects</a
+                >
+                <a
+                    href="/about"
+                    class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                    >About</a
+                >
                 <a
                     href="/contact"
                     class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
                     >Contact</a
                 >
-                <a
-                    href="/solutions"
-                    class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
-                    >Solutions</a
-                >
             </div>
-            <div class="flex gap-4 justify-end items-center">
+            <div class="flex gap-4 justify-end items-center md:col-span-2">
                 <button
                     data-theme-toggle-trigger
                     title="Change theme"
@@ -86,14 +91,14 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
         </a>
         <div class="my-auto flex flex-col gap-4 text-center">
             <a
-                href="/contact"
+                href="/projects"
                 class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
-                >Contact</a
+                >Projects</a
             >
             <a
-                href="/solutions"
+                href="/about"
                 class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
-                >Solutions</a
+                >About</a
             >
             <div>
                 <Button size="md" variant="primary" href="/contact">Contact</Button>
