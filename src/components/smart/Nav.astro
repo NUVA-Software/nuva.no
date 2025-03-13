@@ -74,11 +74,13 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
     </div>
     <dialog
         data-nav-menu
-        class="fixed inset-0 bg-background/50 backdrop-blur-md w-full h-screen z-10 open:flex flex-col justify-center items-center p-4"
+        class="fixed inset-0 bg-transparent w-full h-screen z-10 open:flex flex-col justify-center items-center p-4"
     >
+        <div data-menu-close-trigger class="bg-background/50 backdrop-blur-md w-full h-full absolute inset-0"></div>
+
         <a
             href="/"
-            class="mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+            class="relative mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
         >
             <span class="logo hidden dark:block w-16 md:w-24 h-auto text-current">
                 <Fragment set:html={logoDark} />
@@ -87,7 +89,7 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
                 <Fragment set:html={logoLight} />
             </span>
         </a>
-        <div class="my-auto flex flex-col gap-4 text-center">
+        <div class="relative my-auto flex flex-col gap-4 text-center">
             <a
                 href="/projects"
                 class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
@@ -102,7 +104,7 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
                 <Button size="md" variant="primary" href="/contact">Contact</Button>
             </div>
         </div>
-        <div class="mt-auto">
+        <div class="relative mt-auto">
             <button
                 data-menu-close-trigger
                 title="Close menu"
@@ -116,11 +118,12 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
     </dialog>
     <dialog
         data-nav-search
-        class="fixed inset-0 bg-background/50 backdrop-blur-md w-full h-screen z-10 open:flex flex-col justify-center items-center p-4"
+        class="fixed inset-0 bg-transparent w-full h-screen z-10 open:flex flex-col justify-center items-center p-4"
     >
+        <div data-search-close-trigger class="bg-background/50 backdrop-blur-md w-full h-full absolute inset-0"></div>
         <a
             href="/"
-            class="mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+            class="relative mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
         >
             <span class="logo hidden dark:block w-16 md:w-24 h-auto text-current">
                 <Fragment set:html={logoDark} />
@@ -129,13 +132,13 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
                 <Fragment set:html={logoLight} />
             </span>
         </a>
-        <form class="my-auto flex gap-2 text-center justify-center items-center" action="/search">
+        <form class="relative my-auto flex gap-2 text-center justify-center items-center" action="/search">
             <input name="q" type="search" class="p-2 border-2 border-border" autofocus />
             <button type="submit" class="text-foreground">
                 <Icon class="text-current" icon={Search} />
             </button>
         </form>
-        <div class="mt-auto">
+        <div class="relative mt-auto">
             <button
                 data-search-close-trigger
                 title="Close search"
