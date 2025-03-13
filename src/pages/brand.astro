@@ -1,0 +1,215 @@
+---
+import ContentSection from "../components/dumb/ContentSection.astro";
+import Layout from "../layouts/Layout.astro";
+
+// Define the logomark images data
+const logomarkImages = [
+    {
+        name: "colored-dark-1x1",
+        svgPath: "/images/brand/logomark/nuva-logomark-colored-dark-1x1.svg",
+        pngPath: "/images/brand/logomark/nuva-logomark-colored-dark-1x1.png",
+        alt: "Nuva logomark colored dark 1x1",
+    },
+    {
+        name: "colored-dark",
+        svgPath: "/images/brand/logomark/nuva-logomark-colored-dark.svg",
+        pngPath: "/images/brand/logomark/nuva-logomark-colored-dark.png",
+        alt: "Nuva logomark colored dark",
+    },
+    {
+        name: "colored-light-1x1",
+        svgPath: "/images/brand/logomark/nuva-logomark-colored-light-1x1.svg",
+        pngPath: "/images/brand/logomark/nuva-logomark-colored-light-1x1.png",
+        alt: "Nuva logomark colored light 1x1",
+    },
+    {
+        name: "colored-light",
+        svgPath: "/images/brand/logomark/nuva-logomark-colored-light.svg",
+        pngPath: "/images/brand/logomark/nuva-logomark-colored-light.png",
+        alt: "Nuva logomark colored light",
+    },
+    {
+        name: "transparent-1x1",
+        svgPath: "/images/brand/logomark/nuva-logomark-transparent-1x1.svg",
+        pngPath: "/images/brand/logomark/nuva-logomark-transparent-1x1.png",
+        alt: "Nuva logomark transparent 1x1",
+    },
+    {
+        name: "transparent",
+        svgPath: "/images/brand/logomark/nuva-logomark-transparent.svg",
+        pngPath: "/images/brand/logomark/nuva-logomark-transparent.png",
+        alt: "Nuva logomark transparent",
+    },
+    {
+        name: "white-1x1",
+        svgPath: "/images/brand/logomark/nuva-logomark-white-1x1.svg",
+        pngPath: "/images/brand/logomark/nuva-logomark-white-1x1.png",
+        alt: "Nuva logomark white 1x1",
+    },
+    {
+        name: "white",
+        svgPath: "/images/brand/logomark/nuva-logomark-white.svg",
+        pngPath: "/images/brand/logomark/nuva-logomark-white.png",
+        alt: "Nuva logomark white",
+    },
+];
+
+const logotypeImages = [
+    {
+        name: "colored-dark-1x1",
+        svgPath: "/images/brand/logotype/nuva-logotype-colored-dark-1x1.svg",
+        pngPath: "/images/brand/logotype/nuva-logotype-colored-dark-1x1.png",
+        alt: "Nuva logotype colored dark 1x1",
+    },
+    {
+        name: "colored-dark",
+        svgPath: "/images/brand/logotype/nuva-logotype-colored-dark.svg",
+        pngPath: "/images/brand/logotype/nuva-logotype-colored-dark.png",
+        alt: "Nuva logotype colored dark",
+    },
+    {
+        name: "colored-light-1x1",
+        svgPath: "/images/brand/logotype/nuva-logotype-colored-light-1x1.svg",
+        pngPath: "/images/brand/logotype/nuva-logotype-colored-light-1x1.png",
+        alt: "Nuva logotype colored light 1x1",
+    },
+    {
+        name: "colored-light",
+        svgPath: "/images/brand/logotype/nuva-logotype-colored-light.svg",
+        pngPath: "/images/brand/logotype/nuva-logotype-colored-light.png",
+        alt: "Nuva logotype colored light",
+    },
+    {
+        name: "transparent-1x1",
+        svgPath: "/images/brand/logotype/nuva-logotype-white-transparent-1x1.svg",
+        pngPath: "/images/brand/logotype/nuva-logotype-white-transparent-1x1.png",
+        alt: "Nuva logotype transparent 1x1",
+    },
+    {
+        name: "transparent",
+        svgPath: "/images/brand/logotype/nuva-logotype-white-transparent.svg",
+        pngPath: "/images/brand/logotype/nuva-logotype-white-transparent.png",
+        alt: "Nuva logotype transparent",
+    },
+    {
+        name: "white-1x1",
+        svgPath: "/images/brand/logotype/nuva-logotype-white-1x1.svg",
+        pngPath: "/images/brand/logotype/nuva-logotype-white-1x1.png",
+        alt: "Nuva logotype white 1x1",
+    },
+    {
+        name: "white",
+        svgPath: "/images/brand/logotype/nuva-logotype-white.svg",
+        pngPath: "/images/brand/logotype/nuva-logotype-white.png",
+        alt: "Nuva logotype white",
+    },
+];
+
+const graphicsImages = [
+    {
+        name: "hello",
+        svgPath: "/images/hello.svg",
+        pngPath: null,
+        alt: "Hello",
+    },
+];
+---
+
+<Layout allowRobots={false}>
+    <main class="max-w-screen-2xl mx-auto min-h-[calc(100vh-10rem)] pt-16">
+        <div class="text-center">
+            <h2 class="mt-16 mx-auto font-light font-serif text-3xl">Brand resources</h2>
+        </div>
+        <ContentSection>
+            <h2 class="text-2xl font-bold p-2 lg:p-4">Logomark</h2>
+            <ul class="p-2 lg:p-4 grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
+                {
+                    logomarkImages.map((image) => (
+                        <li class="flex flex-col justify-center items-center p-2 lg:p-4 bg-foreground/5 rounded-lg">
+                            <a href={image.svgPath}>
+                                <img
+                                    src={image.svgPath}
+                                    alt={image.alt}
+                                    class="w-32 h-32 object-contain object-center"
+                                />
+                            </a>
+                            <p class="text-sm">{image.name}</p>
+                            {image?.svgPath && (
+                                <a href={image.svgPath} download class="break-all hover:underline">
+                                    <span class="text-sm p-1 bg-purple-500 text-white rounded-lg">SVG</span>
+                                    <span>Download</span>
+                                </a>
+                            )}
+                            {image?.pngPath && (
+                                <a href={image.pngPath} download class="break-all hover:underline">
+                                    <span class="text-sm p-1 bg-green-500 text-white rounded-lg">PNG</span>
+                                    <span>Download</span>
+                                </a>
+                            )}
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <h2 class="text-2xl font-bold p-2 lg:p-4">Logotype</h2>
+            <ul class="p-2 lg:p-4 grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
+                {
+                    logotypeImages.map((image) => (
+                        <li class="flex flex-col justify-center items-center p-2 lg:p-4 bg-foreground/5 rounded-lg">
+                            <a href={image.svgPath}>
+                                <img
+                                    src={image.svgPath}
+                                    alt={image.alt}
+                                    class="w-32 h-32 object-contain object-center"
+                                />
+                            </a>
+                            <p class="text-sm">{image.name}</p>
+                            {image?.svgPath && (
+                                <a href={image.svgPath} download class="break-all hover:underline">
+                                    <span class="text-sm p-1 bg-purple-500 text-white rounded-lg">SVG</span>
+                                    <span>Download</span>
+                                </a>
+                            )}
+                            {image?.pngPath && (
+                                <a href={image.pngPath} download class="break-all hover:underline">
+                                    <span class="text-sm p-1 bg-green-500 text-white rounded-lg">PNG</span>
+                                    <span>Download</span>
+                                </a>
+                            )}
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <h2 class="text-2xl font-bold p-2 lg:p-4">Graphics</h2>
+            <ul class="p-2 lg:p-4 grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
+                {
+                    graphicsImages.map((image) => (
+                        <li class="flex flex-col justify-center items-center p-2 lg:p-4 bg-foreground/5 rounded-lg">
+                            <a href={image.svgPath}>
+                                <img
+                                    src={image.svgPath}
+                                    alt={image.alt}
+                                    class="w-32 h-32 object-contain object-center"
+                                />
+                            </a>
+                            <p class="text-sm">{image.name}</p>
+                            {image?.svgPath && (
+                                <a href={image.svgPath} download class="break-all hover:underline">
+                                    <span class="text-sm p-1 bg-purple-500 text-white rounded-lg">SVG</span>
+                                    <span>Download</span>
+                                </a>
+                            )}
+                            {image?.pngPath && (
+                                <a href={image.pngPath} download class="break-all hover:underline">
+                                    <span class="text-sm p-1 bg-green-500 text-white rounded-lg">PNG</span>
+                                    <span>Download</span>
+                                </a>
+                            )}
+                        </li>
+                    ))
+                }
+            </ul>
+        </ContentSection>
+    </main>
+</Layout>

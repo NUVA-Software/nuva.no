@@ -1,6 +1,6 @@
 ---
-// import logoDark from "../../../public/images/saunabooking-logo-dark-t.svg?raw";
-// import logoLight from "../../../public/images/saunabooking-logo-light-t.svg?raw";
+import logoLight from "../../../public/images/brand/logomark/nuva-logomark-colored-light.svg?raw";
+import logoDark from "../../../public/images/brand/logomark/nuva-logomark-colored-dark.svg?raw";
 import Button from "../dumb/Button.astro";
 import Icon from "../dumb/Icon.astro";
 import { Menu, Search, X, Sun, Moon } from "lucide";
@@ -13,13 +13,12 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
                 href="/"
                 class="py-2 w-full mr-auto flex gap-2 text-foreground items-center justify-start hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
             >
-                <!-- <span class="logo dark:hidden w-8 md:w-10 h-auto block text-current">
+                <span class="logo hidden dark:block w-8 md:w-10 h-auto text-current">
                     <Fragment set:html={logoDark} />
                 </span>
-                <span class="logo hidden dark:block w-8 md:w-10 h-auto text-current">
+                <span class="logo block dark:hidden w-8 md:w-10 h-auto text-current">
                     <Fragment set:html={logoLight} />
-                </span> -->
-                <span class="font-serif font-bold text-2xl">NUVA</span>
+                </span>
             </a>
             <div class="hidden md:flex gap-4 justify-start items-center md:col-span-2">
                 <a
@@ -81,13 +80,12 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
             href="/"
             class="mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
         >
-            <!-- <span class="logo dark:hidden w-8 md:w-10 h-auto block text-current">
+            <span class="logo hidden dark:block w-16 md:w-24 h-auto text-current">
                 <Fragment set:html={logoDark} />
             </span>
-            <span class="logo hidden dark:block w-8 md:w-10 h-auto text-current">
+            <span class="logo block dark:hidden w-16 md:w-24 h-auto text-current">
                 <Fragment set:html={logoLight} />
-            </span> -->
-            <span>NUVA AS</span>
+            </span>
         </a>
         <div class="my-auto flex flex-col gap-4 text-center">
             <a
@@ -124,13 +122,12 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
             href="/"
             class="mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
         >
-            <!-- <span class="logo dark:hidden w-8 md:w-10 h-auto block text-current">
+            <span class="logo hidden dark:block w-16 md:w-24 h-auto text-current">
                 <Fragment set:html={logoDark} />
             </span>
-            <span class="logo hidden dark:block w-8 md:w-10 h-auto text-current">
+            <span class="logo block dark:hidden w-16 md:w-24 h-auto text-current">
                 <Fragment set:html={logoLight} />
-            </span> -->
-            <span>NUVA AS</span>
+            </span>
         </a>
         <form class="my-auto flex gap-2 text-center justify-center items-center" action="/search">
             <input name="q" type="search" class="p-2 border-2 border-border" autofocus />

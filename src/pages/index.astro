@@ -1,27 +1,38 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import logoLight from "../../public/images/brand/logotype/nuva-logotype-colored-light.svg?raw";
+import logoDark from "../../public/images/brand/logotype/nuva-logotype-colored-dark.svg?raw";
 import helloGraphic from "../../public/images/hello.svg?raw";
 import ContentSection from "../components/dumb/ContentSection.astro";
 import Button from "../components/dumb/Button.astro";
 ---
 
 <Layout>
-    <main>
+    <main id="index-main">
         <!-- <div class="bg-foreground/5 pt-12 lg:pt-14"> -->
         <div class="pt-32 min-h-[calc(100vh-10rem)]">
-            <ContentSection className="flex flex-col lg:grid lg:grid-cols-3 items-center">
+            <ContentSection className="flex flex-col lg:grid lg:grid-cols-3 items-center gap-8">
                 <div>
-                    <h1 class="font-serif font-light text-8xl">NUVA</h1>
-                    <p class="mt-4">
+                    <h1 class="logo hidden dark:block mx-auto w-32 md:w-64 lg:w-full text-current">
+                        <Fragment set:html={logoDark} />
+                    </h1>
+                    <h1 class="logo block dark:hidden mx-auto w-32 md:w-64 lg:w-full text-current">
+                        <Fragment set:html={logoLight} />
+                    </h1>
+                    <p>
                         We are a technology agency that specializes in building tailormade software and hardware, for
                         spesific industry needs.
                     </p>
                     <div class="flex gap-2 mt-4">
-                        <Button href="/contact" variant="primary">Contact us</Button>
-                        <Button href="/projects" variant="primaryOutline">Our projects</Button>
+                        <Button href="/contact" variant="primary"
+                            ><span class="whitespace-nowrap">Contact us</span></Button
+                        >
+                        <Button href="/projects" variant="primaryOutline"
+                            ><span class="whitespace-nowrap">Our projects</span></Button
+                        >
                     </div>
                 </div>
-                <div class="w-full max-w-full flex justify-center items-center lg:col-span-2 p-4">
+                <div class="graphic w-full max-w-full flex justify-center items-center lg:col-span-2 p-4">
                     <Fragment set:html={helloGraphic} />
                 </div>
             </ContentSection>
@@ -31,3 +42,11 @@ import Button from "../components/dumb/Button.astro";
         </ContentSection> -->
     </main>
 </Layout>
+
+<style is:global>
+    #index-main .logo svg,
+    #index-main .graphic svg {
+        width: 100%;
+        height: auto;
+    }
+</style>

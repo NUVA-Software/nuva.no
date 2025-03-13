@@ -19,15 +19,14 @@ export function getRootRoutes() {
 
     const pagesDir = resolve("./src/pages");
     const files = readdirSync(pagesDir);
+    const excludedPages = ["search", "brand"];
 
     return files
         .filter((file) => file.endsWith(".astro"))
         .filter((file) => {
             let path = file.replace(".astro", "");
 
-            if (path === "search") {
-                return false;
-            } else if (path === "app") {
+            if (excludedPages.includes(path)) {
                 return false;
             }
 
