@@ -15,3 +15,17 @@ import "../components/dumb/ContentRenderer.css";
         </header>
     </main>
 </Layout>
+
+<script>
+    (function () {
+        const baseUrl = window.location.origin;
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get("code");
+
+        if (!code) {
+            return;
+        }
+
+        window.location.href = `${baseUrl}/squad-konto-bekreftet?code=${code}`;
+    })();
+</script>
