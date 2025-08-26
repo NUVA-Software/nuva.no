@@ -6,41 +6,162 @@ import ContentSection from "../components/dumb/ContentSection.astro";
 
 <Layout>
     <main class="min-h-[calc(100vh-10rem)]">
-        <div class="text-center bg-primary-500 text-white pt-16 pb-8">
-            <h2 class="mt-4 mx-auto font-bold font-serif text-4xl">Our projects</h2>
+        <!-- Hero Section -->
+        <div class="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+            </div>
+            
+            <div class="relative pt-20 pb-16 px-4 lg:px-8">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="font-serif font-bold text-5xl lg:text-6xl mb-6 leading-tight">
+                        Our Projects
+                    </h1>
+                    <p class="text-xl lg:text-2xl text-primary-100 max-w-2xl mx-auto leading-relaxed">
+                        Discover how we've helped businesses transform their operations with custom software solutions
+                    </p>
+                </div>
+            </div>
         </div>
-        <ContentSection className="py-8">
-            <ul class="flex flex-col gap-8 md:gap-16">
+
+        <!-- Projects Grid -->
+        <ContentSection className="py-16 lg:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
                 {
                     projects.map((project) => (
-                        <li class="flex flex-col md:flex-row gap-4 justify-start items-center">
-                            <a href={`/projects/${project.slug}`} class="block w-full md:w-64 h-40 flex-shrink-0">
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    class="w-full h-full object-cover shadow-lg rounded-lg hover:opacity-75"
-                                />
-                            </a>
-                            <div class="flex-grow">
-                                <h3 class="font-bold font-serif text-xl">
-                                    <a
-                                        href={`/projects/${project.slug}`}
-                                        class="hover:underline hover:text-primary-500"
-                                    >
+                        <article class="group bg-white dark:bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden border border-gray-100 dark:border-gray-800">
+                            <!-- Project Image -->
+                            <div class="relative overflow-hidden">
+                                <a href={`/projects/${project.slug}`} class="block">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        class="w-full h-48 lg:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    <!-- Overlay -->
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                </a>
+                                
+                                <!-- Customer Badge -->
+                                {project.customer && (
+                                    <div class="absolute top-4 left-4">
+                                        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white/90 text-gray-800 backdrop-blur-sm">
+                                            {project.customer}
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+
+                            <!-- Project Content -->
+                            <div class="p-6 lg:p-8">
+                                <h3 class="font-serif font-bold text-2xl lg:text-3xl mb-4 text-gray-900 dark:text-white group-hover:text-primary-600 transition-colors duration-300">
+                                    <a href={`/projects/${project.slug}`} class="hover:no-underline">
                                         {project.title}
                                     </a>
                                 </h3>
-                                <p>{project.description}</p>
-                                <p>
-                                    <a href={`/projects/${project.slug}`} class="text-primary-500 underline">
-                                        Read more
-                                    </a>
+                                
+                                <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
+                                    {project.description}
                                 </p>
+
+                                <!-- Action Buttons -->
+                                <div class="flex flex-wrap gap-3">
+                                    <a 
+                                        href={`/projects/${project.slug}`} 
+                                        class="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary-600/25 transform hover:-translate-y-0.5"
+                                    >
+                                        View Project
+                                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                    
+                                    {project.link && (
+                                        <a 
+                                            href={project.link} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 font-medium rounded-lg transition-all duration-300"
+                                        >
+                                            Visit Site
+                                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                            </svg>
+                                        </a>
+                                    )}
+                                    
+                                    {project.customerLink && (
+                                        <a 
+                                            href={project.customerLink} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 font-medium rounded-lg transition-all duration-300"
+                                        >
+                                            Customer Site
+                                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                            </svg>
+                                        </a>
+                                    )}
+                                </div>
                             </div>
-                        </li>
+                        </article>
                     ))
                 }
-            </ul>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="mt-20 text-center">
+                <div class="max-w-2xl mx-auto">
+                    <h2 class="font-serif font-bold text-3xl lg:text-4xl mb-6 text-gray-900 dark:text-white">
+                        Ready to start your project?
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                        Let's discuss how we can help transform your business with custom software solutions
+                    </p>
+                    <a 
+                        href="/contact" 
+                        class="inline-flex items-center px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold text-lg rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-primary-600/25 transform hover:-translate-y-1"
+                    >
+                        Get Started
+                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </ContentSection>
     </main>
 </Layout>
+
+<style>
+    /* Custom scrollbar for webkit browsers */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Custom focus styles */
+    a:focus, button:focus {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+    }
+</style>
