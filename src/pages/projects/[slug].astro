@@ -1,6 +1,5 @@
 ---
 import type { GetStaticPaths } from "astro";
-import Button from "../../components/dumb/Button.astro";
 import ContentSection from "../../components/dumb/ContentSection.astro";
 import Layout from "../../layouts/Layout.astro";
 import { projects } from "../../data/projects";
@@ -18,46 +17,46 @@ export const getStaticPaths = (() => {
 
 <Layout>
     <main>
-        {!project && <div>Project not found</div>}
+        {!project && <div class="p-8 text-center">Project not found</div>}
         {
             project && (
-                <div class="">
-                    <div class="bg-primary-500 text-white pt-24 pb-8">
-                        <ContentSection className="flex flex-col md:flex-row justify-between md:items-end gap-4">
+                <div>
+                    <div class="bg-primary-600 dark:bg-primary-800 text-white pt-24 pb-12">
+                        <ContentSection className="flex flex-col md:flex-row justify-between md:items-end gap-6">
                             <div class="w-full max-w-2xl">
-                                <a href="/projects" class="text-white hover:underline">
-                                    <span>&larr;</span>
-                                    <span>Projects</span>
+                                <a href="/projects" class="inline-flex items-center gap-1 text-white/60 hover:text-white transition-colors duration-200 text-sm mb-6">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                    Back to projects
                                 </a>
-                                <h1 class="font-serif font-bold text-4xl md:text-6xl mt-4">{project.title}</h1>
-                                <p class="mt-4">{project.description}</p>
+                                <h1 class="font-serif font-bold text-4xl md:text-5xl lg:text-6xl">{project.title}</h1>
+                                <p class="mt-4 text-white/75 text-lg leading-relaxed">{project.description}</p>
                                 {project.link && (
                                     <a
                                         href={project.link}
                                         target="_blank"
                                         rel="noopener"
-                                        class="mt-2 text-white underline inline-block"
+                                        class="mt-3 text-white/60 hover:text-white underline underline-offset-4 inline-block text-sm transition-colors duration-200"
                                     >
                                         {new URL(project.link).origin}
                                     </a>
                                 )}
                             </div>
                             {project.customer && (
-                                <div>
+                                <div class="md:text-right">
                                     {!project.customerLink && (
                                         <p>
-                                            <span class="opacity-50 font-light">Customer: </span>
-                                            <span>{project.customer}</span>
+                                            <span class="text-white/40 text-sm">Customer</span><br />
+                                            <span class="font-medium">{project.customer}</span>
                                         </p>
                                     )}
                                     {project.customerLink && (
                                         <p>
-                                            <span class="opacity-50 font-light">Customer: </span>
+                                            <span class="text-white/40 text-sm">Customer</span><br />
                                             <a
                                                 href={project.customerLink}
                                                 target="_blank"
                                                 rel="noopener"
-                                                class="hover:text-white hover:underline"
+                                                class="font-medium hover:underline underline-offset-4"
                                             >
                                                 {project.customer}
                                             </a>
@@ -68,11 +67,11 @@ export const getStaticPaths = (() => {
                         </ContentSection>
                     </div>
                     <ContentSection>
-                        <div class="w-full max-w-full flex justify-center items-center py-8">
+                        <div class="w-full max-w-full flex justify-center items-center py-12">
                             <img
                                 src={project.image}
-                                alt={`${project.title} project image`}
-                                class="rounded-lg shadow-xl"
+                                alt={project.title}
+                                class="rounded-xl shadow-2xl shadow-foreground/10 border border-border/20"
                             />
                         </div>
                     </ContentSection>

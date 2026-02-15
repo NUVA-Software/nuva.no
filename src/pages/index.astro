@@ -2,50 +2,118 @@
 import Layout from "../layouts/Layout.astro";
 import logoLight from "../../public/images/brand/logotype/nuva-logotype-colored-light.svg?raw";
 import logoDark from "../../public/images/brand/logotype/nuva-logotype-colored-dark.svg?raw";
-import helloGraphic from "../../public/images/hello.svg?raw";
 import ContentSection from "../components/dumb/ContentSection.astro";
 import Button from "../components/dumb/Button.astro";
+import Icon from "../components/dumb/Icon.astro";
+import { Globe, Cpu, Zap } from "lucide";
 ---
 
-<Layout>
+<Layout marginForNav={false}>
     <main id="index-main">
-        <!-- <div class="bg-foreground/5 pt-12 lg:pt-14"> -->
-        <div class="pt-32 min-h-[calc(100vh-10rem)]">
-            <ContentSection className="flex flex-col lg:grid lg:grid-cols-3 items-center gap-8">
-                <div>
-                    <h1 class="logo hidden dark:block mx-auto w-32 md:w-64 lg:w-full text-current">
+        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-14 lg:pt-16">
+            <div class="absolute inset-0 hero-dot-grid"></div>
+            <div class="hero-glow"></div>
+
+            <div class="relative z-10 max-w-3xl mx-auto px-4 text-center py-20">
+                <div data-animate class="mb-8">
+                    <h1 class="logo hidden dark:block mx-auto w-44 md:w-64 text-current">
                         <Fragment set:html={logoDark} />
                     </h1>
-                    <h1 class="logo block dark:hidden mx-auto w-32 md:w-64 lg:w-full text-current">
+                    <h1 class="logo block dark:hidden mx-auto w-44 md:w-64 text-current">
                         <Fragment set:html={logoLight} />
                     </h1>
-                    <p>
-                        We are a technology agency that specializes in building tailormade software and hardware, for
-                        spesific industry needs.
-                    </p>
-                    <div class="flex gap-2 mt-4">
-                        <Button href="/contact" variant="primary"
-                            ><span class="whitespace-nowrap">Contact us</span></Button
-                        >
-                        <Button href="/projects" variant="primaryOutline"
-                            ><span class="whitespace-nowrap">Our projects</span></Button
-                        >
+                </div>
+
+                <p class="text-2xl md:text-3xl lg:text-[2.5rem] font-serif font-bold leading-snug mb-6" data-animate data-delay="100">
+                    We build custom software<br />and hardware.
+                </p>
+
+                <p class="text-base md:text-lg text-foreground/55 max-w-xl mx-auto leading-relaxed mb-10" data-animate data-delay="200">
+                    For businesses with specific industry needs.<br class="hidden sm:block" />
+                    Based in Sandefjord, Norway.
+                </p>
+
+                <div class="flex flex-wrap gap-3 justify-center" data-animate data-delay="300">
+                    <Button href="/projects" variant="primary">See our work</Button>
+                    <Button href="/contact" variant="primaryOutline">Get in touch</Button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 lg:py-32 border-t border-border/20">
+            <ContentSection>
+                <h2 class="font-serif font-bold text-3xl lg:text-4xl text-center mb-4" data-animate>What we do</h2>
+                <p class="text-foreground/50 text-center max-w-lg mx-auto mb-16" data-animate data-delay="50">
+                    We handle the full stack — from cloud infrastructure to physical hardware.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+                    <div data-animate data-delay="0">
+                        <div class="w-11 h-11 rounded-lg bg-primary-500/10 flex items-center justify-center mb-5">
+                            <Icon icon={Globe} class="w-5 h-5 text-primary-500" />
+                        </div>
+                        <h3 class="font-serif font-bold text-xl mb-3">Software</h3>
+                        <p class="text-foreground/55 leading-relaxed text-[0.95rem]">
+                            From booking systems to contract management — we build web applications that handle the complexity, so your team doesn't have to.
+                        </p>
+                    </div>
+                    <div data-animate data-delay="100">
+                        <div class="w-11 h-11 rounded-lg bg-primary-500/10 flex items-center justify-center mb-5">
+                            <Icon icon={Cpu} class="w-5 h-5 text-primary-500" />
+                        </div>
+                        <h3 class="font-serif font-bold text-xl mb-3">Hardware & IoT</h3>
+                        <p class="text-foreground/55 leading-relaxed text-[0.95rem]">
+                            QR scanners, smart locks, sauna controllers. If it needs to connect to the internet and do something useful, we can build it.
+                        </p>
+                    </div>
+                    <div data-animate data-delay="200">
+                        <div class="w-11 h-11 rounded-lg bg-primary-500/10 flex items-center justify-center mb-5">
+                            <Icon icon={Zap} class="w-5 h-5 text-primary-500" />
+                        </div>
+                        <h3 class="font-serif font-bold text-xl mb-3">Integrations</h3>
+                        <p class="text-foreground/55 leading-relaxed text-[0.95rem]">
+                            Payment providers, third-party APIs, and custom automation. We connect your systems so they actually work together.
+                        </p>
                     </div>
                 </div>
-                <div class="graphic w-full max-w-full flex justify-center items-center lg:col-span-2 p-4">
-                    <Fragment set:html={helloGraphic} />
-                </div>
             </ContentSection>
-        </div>
-        <!-- <ContentSection className="flex justify-between">
-            <p>hello</p>
-        </ContentSection> -->
+        </section>
+
+        <section class="py-20 lg:py-28 bg-primary-600 dark:bg-primary-800 text-white">
+            <div class="max-w-2xl mx-auto px-4 text-center" data-animate>
+                <h2 class="font-serif font-bold text-3xl lg:text-4xl mb-4">Have a project in mind?</h2>
+                <p class="text-white/70 text-lg mb-8">We'd like to hear about it.</p>
+                <a
+                    href="/contact"
+                    class="inline-block px-8 py-4 bg-white text-primary-700 font-medium rounded-lg hover:bg-primary-50 transition-all duration-200 hover:shadow-lg"
+                >
+                    Get in touch
+                </a>
+            </div>
+        </section>
     </main>
 </Layout>
 
+<style>
+    .hero-dot-grid {
+        background-image: radial-gradient(circle, hsl(var(--primary-500) / 0.07) 1px, transparent 1px);
+        background-size: 28px 28px;
+    }
+
+    .hero-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(700px, 90vw);
+        height: min(700px, 90vw);
+        background: radial-gradient(circle, hsl(var(--primary-500) / 0.06) 0%, transparent 65%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+</style>
+
 <style is:global>
-    #index-main .logo svg,
-    #index-main .graphic svg {
+    #index-main .logo svg {
         width: 100%;
         height: auto;
     }

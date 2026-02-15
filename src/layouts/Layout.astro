@@ -16,7 +16,7 @@ const defaultTitle = "NUVA — Technology agency";
 const {
     title = defaultTitle,
     forceTitle = false,
-    description = "NUVA Software is a technology agency that specializes in building tailormade software and hardware, for specific industry needs.",
+    description = "NUVA is a technology studio in Sandefjord, Norway. We build custom software, hardware, and integrations for businesses with specific industry needs.",
     image = "/image.jpg",
     marginForNav = true,
     allowRobots = true,
@@ -24,7 +24,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" style="background-color: #000000;">
+<html lang="en" style="background-color: #0a1410;">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
@@ -63,9 +63,6 @@ const {
                 min-width: 0;
             }
 
-            html {
-                font-size: 20px;
-            }
             @font-face {
                 font-family: "Butler";
                 src:
@@ -73,6 +70,7 @@ const {
                     url("/fonts/butler_bold-webfont.woff") format("woff");
                 font-weight: 700;
                 font-style: normal;
+                font-display: swap;
             }
 
             @font-face {
@@ -82,16 +80,32 @@ const {
                     url("/fonts/butler_light-webfont.woff") format("woff");
                 font-weight: 300;
                 font-style: normal;
+                font-display: swap;
             }
         </style>
     </head>
-    <body class="bg-background text-foreground">
+    <body class="bg-background text-foreground antialiased">
         <Nav />
-        {marginForNav && <div class="pt-12 lg:pt-14" />}
+        {marginForNav && <div class="pt-14 lg:pt-16" />}
         <slot />
         <Footer />
     </body>
 </html>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.getAttribute('data-delay') || '0';
+                (entry.target as HTMLElement).style.animationDelay = `${delay}ms`;
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+</script>
 
 <style is:global>
     @font-face {
@@ -101,6 +115,7 @@ const {
             url("/fonts/butler_bold-webfont.woff") format("woff");
         font-weight: 700;
         font-style: normal;
+        font-display: swap;
     }
 
     @font-face {
@@ -110,10 +125,12 @@ const {
             url("/fonts/butler_light-webfont.woff") format("woff");
         font-weight: 300;
         font-style: normal;
+        font-display: swap;
     }
 
     html {
         font-size: 18px;
+        scroll-behavior: smooth;
     }
 
     @tailwind base;
@@ -122,102 +139,99 @@ const {
 
     @layer base {
         :root {
-            --background: 0 0% 100%;
-            --foreground: 0 0% 0%;
-            --border: 0 0% 0%;
+            --background: 60 10% 98%;
+            --foreground: 160 10% 12%;
+            --border: 160 5% 82%;
 
-            --primary-50: 155.9, 62.2%, 70%;
-            --primary-100: 155.9, 62.2%, 60%;
-            --primary-200: 155.9, 62.2%, 50%;
-            --primary-300: 155.9, 62.2%, 40%;
-            --primary-400: 155.9, 62.2%, 30%;
-            --primary-500: 155.9, 62.2%, 32.2%; /* #1f855c */
-            --primary-600: 155.9, 62.2%, 20%;
-            --primary-700: 155.9, 62.2%, 15%;
-            --primary-800: 155.9, 62.2%, 10%;
-            --primary-900: 155.9, 62.2%, 5%;
-            --primary-950: 155.9, 62.2%, 2.5%;
+            --primary-50: 155.9 40% 96%;
+            --primary-100: 155.9 45% 90%;
+            --primary-200: 155.9 50% 78%;
+            --primary-300: 155.9 55% 62%;
+            --primary-400: 155.9 60% 44%;
+            --primary-500: 155.9 62.2% 32.2%;
+            --primary-600: 155.9 65% 26%;
+            --primary-700: 155.9 65% 20%;
+            --primary-800: 155.9 60% 15%;
+            --primary-900: 155.9 55% 10%;
+            --primary-950: 155.9 50% 5%;
 
-            --secondary-50: 34, 74%, 95%;
-            --secondary-100: 34, 74%, 90%;
-            --secondary-200: 34, 74%, 85%;
-            --secondary-300: 34, 74%, 80%;
-            --secondary-400: 34, 74%, 75%;
-            --secondary-500: 34, 74%, 70%;
-            --secondary-600: 34, 74%, 60%;
-            --secondary-700: 34, 74%, 50%;
-            --secondary-800: 34, 74%, 40%;
-            --secondary-900: 34, 74%, 30%;
-            --secondary-950: 34, 74%, 20%;
+            --secondary-50: 34 74% 95%;
+            --secondary-100: 34 74% 90%;
+            --secondary-200: 34 74% 85%;
+            --secondary-300: 34 74% 80%;
+            --secondary-400: 34 74% 75%;
+            --secondary-500: 34 74% 70%;
+            --secondary-600: 34 74% 60%;
+            --secondary-700: 34 74% 50%;
+            --secondary-800: 34 74% 40%;
+            --secondary-900: 34 74% 30%;
+            --secondary-950: 34 74% 20%;
 
-            --info-50: 225.7, 100%, 95.1%;
-            --info-100: 225.7, 100%, 90.1%;
-            --info-200: 225.7, 100%, 87.1%;
-            --info-300: 225.7, 100%, 83.1%;
-            --info-400: 225.7, 100%, 80.1%;
-            --info-500: 225.7, 100%, 76.1%;
-            --info-600: 225.7, 100%, 65.1%;
-            --info-700: 225.7, 100%, 50.1%;
-            --info-800: 225.7, 100%, 40.1%;
-            --info-900: 225.7, 100%, 30.1%;
-            --info-950: 225.7, 100%, 20.1%;
+            --info-50: 225.7 100% 95.1%;
+            --info-100: 225.7 100% 90.1%;
+            --info-200: 225.7 100% 87.1%;
+            --info-300: 225.7 100% 83.1%;
+            --info-400: 225.7 100% 80.1%;
+            --info-500: 225.7 100% 76.1%;
+            --info-600: 225.7 100% 65.1%;
+            --info-700: 225.7 100% 50.1%;
+            --info-800: 225.7 100% 40.1%;
+            --info-900: 225.7 100% 30.1%;
+            --info-950: 225.7 100% 20.1%;
 
-            --success-50: 160.4, 100%, 95.5%;
-            --success-100: 160.4, 100%, 90.5%;
-            --success-200: 160.4, 100%, 80.5%;
-            --success-300: 160.4, 100%, 70.5%;
-            --success-400: 160.4, 100%, 60.5%;
-            --success-500: 160.4, 100%, 42.5%;
-            --success-600: 160.4, 100%, 35.5%;
-            --success-700: 160.4, 100%, 30.5%;
-            --success-800: 160.4, 100%, 25.5%;
-            --success-900: 160.4, 100%, 20.5%;
-            --success-950: 160.4, 100%, 15.5%;
+            --success-50: 160.4 100% 95.5%;
+            --success-100: 160.4 100% 90.5%;
+            --success-200: 160.4 100% 80.5%;
+            --success-300: 160.4 100% 70.5%;
+            --success-400: 160.4 100% 60.5%;
+            --success-500: 160.4 100% 42.5%;
+            --success-600: 160.4 100% 35.5%;
+            --success-700: 160.4 100% 30.5%;
+            --success-800: 160.4 100% 25.5%;
+            --success-900: 160.4 100% 20.5%;
+            --success-950: 160.4 100% 15.5%;
 
-            --warning-50: 41.3, 100%, 95.1%;
-            --warning-100: 41.3, 100%, 90.1%;
-            --warning-200: 41.3, 100%, 80.1%;
-            --warning-300: 41.3, 100%, 70.1%;
-            --warning-400: 41.3, 100%, 60.1%;
-            --warning-500: 41.3, 100%, 54.1%;
-            --warning-600: 41.3, 100%, 45.1%;
-            --warning-700: 41.3, 100%, 35.1%;
-            --warning-800: 41.3, 100%, 25.1%;
-            --warning-900: 41.3, 100%, 15.1%;
-            --warning-950: 41.3, 100%, 5.1%;
+            --warning-50: 41.3 100% 95.1%;
+            --warning-100: 41.3 100% 90.1%;
+            --warning-200: 41.3 100% 80.1%;
+            --warning-300: 41.3 100% 70.1%;
+            --warning-400: 41.3 100% 60.1%;
+            --warning-500: 41.3 100% 54.1%;
+            --warning-600: 41.3 100% 45.1%;
+            --warning-700: 41.3 100% 35.1%;
+            --warning-800: 41.3 100% 25.1%;
+            --warning-900: 41.3 100% 15.1%;
+            --warning-950: 41.3 100% 5.1%;
 
-            --danger-50: 346.2, 100%, 95.2%;
-            --danger-100: 346.2, 100%, 90.2%;
-            --danger-200: 346.2, 100%, 85.2%;
-            --danger-300: 346.2, 100%, 80.2%;
-            --danger-400: 346.2, 100%, 75.2%;
-            --danger-500: 346.2, 100%, 69.2%;
-            --danger-600: 346.2, 100%, 55.2%;
-            --danger-700: 346.2, 100%, 40.2%;
-            --danger-800: 346.2, 100%, 30.2%;
-            --danger-900: 346.2, 100%, 20.2%;
-            --danger-950: 346.2, 100%, 10.2%;
+            --danger-50: 346.2 100% 95.2%;
+            --danger-100: 346.2 100% 90.2%;
+            --danger-200: 346.2 100% 85.2%;
+            --danger-300: 346.2 100% 80.2%;
+            --danger-400: 346.2 100% 75.2%;
+            --danger-500: 346.2 100% 69.2%;
+            --danger-600: 346.2 100% 55.2%;
+            --danger-700: 346.2 100% 40.2%;
+            --danger-800: 346.2 100% 30.2%;
+            --danger-900: 346.2 100% 20.2%;
+            --danger-950: 346.2 100% 10.2%;
         }
 
         :root.dark {
-            --background: 158.8 45.9% 10.5%; /* dark green */
-            --background: 222.2 47.4% 11.2%; /* slate-900 */
+            --background: 155 20% 7%;
+            --foreground: 60 10% 92%;
+            --border: 155 10% 20%;
 
-            --foreground: 0 0% 100%;
-            --border: 0 0% 100%;
-            /* --beige: 41.7, 36.5%, 87.6%; */
-
-            --primary-50: 155.6, 62.4%, 90%;
-            --primary-100: 155.6, 62.4%, 80%;
-            --primary-200: 155.6, 62.4%, 70%;
-            --primary-300: 155.6, 62.4%, 60%;
-            --primary-400: 155.6, 62.4%, 50%;
-            --primary-500: 155.6, 62.4%, 38.6%; /* #25a06e */
-            --primary-600: 155.6, 62.4%, 30%;
-            --primary-700: 155.6, 62.4%, 26.3%;
-            --primary-800: 155.6, 62.4%, 20%;
-            --primary-900: 155.6, 62.4%, 15%;
-            --primary-950: 155.6, 62.4%, 10%;
+            --primary-50: 155.6 50% 90%;
+            --primary-100: 155.6 50% 80%;
+            --primary-200: 155.6 55% 68%;
+            --primary-300: 155.6 58% 55%;
+            --primary-400: 155.6 60% 45%;
+            --primary-500: 155.6 62.4% 38.6%;
+            --primary-600: 155.6 62.4% 30%;
+            --primary-700: 155.6 62.4% 26.3%;
+            --primary-800: 155.6 62.4% 20%;
+            --primary-900: 155.6 62.4% 15%;
+            --primary-950: 155.6 62.4% 10%;
         }
     }
 
@@ -232,7 +246,35 @@ const {
 
     ::selection {
         background-color: hsl(var(--primary-500));
-        color: hsl(var(--background));
+        color: white;
         text-shadow: none;
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    [data-animate] {
+        opacity: 0;
+    }
+
+    [data-animate].is-visible {
+        animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    [data-animate="fade"].is-visible {
+        animation: fadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 </style>

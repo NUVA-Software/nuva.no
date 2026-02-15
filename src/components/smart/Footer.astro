@@ -1,34 +1,51 @@
 ---
-import logoLight from "../../../public/images/brand/logomark/nuva-logomark-colored-light.svg?raw";
-import logoDark from "../../../public/images/brand/logomark/nuva-logomark-colored-dark.svg?raw";
 ---
 
-<footer class="w-full bg-foreground/5">
-    <div
-        class="p-8 max-w-screen-2xl mx-auto flex flex-col lg:flex-row gap-2 justify-between items-center lg:items-start"
-    >
-        <h2>
-            <a href="/" class="hover:underline focus:underline flex gap-4 items-center">
-                <img
-                    class="h-16 w-auto dark:hidden"
-                    src="/images/brand/logotype/nuva-logotype-colored-light.svg"
-                    alt=""
-                />
-                <img
-                    class="h-16 w-auto hidden dark:block"
-                    src="/images/brand/logotype/nuva-logotype-colored-dark.svg"
-                    alt=""
-                />
-            </a>
-        </h2>
-        <div class="ml-auto"></div>
-        <div class="flex flex-col items-center lg:items-end gap-1">
-            <a href="/projects" class="hover:underline focus:underline">Projects</a>
-            <a href="/about" class="hover:underline focus:underline">About</a>
-            <a href="/contact" class="hover:underline focus:underline">Contact</a>
+<footer class="w-full border-t border-border/30">
+    <div class="max-w-screen-2xl mx-auto px-4 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+            <div>
+                <a href="/" class="inline-block mb-4">
+                    <img
+                        class="h-10 w-auto dark:hidden"
+                        src="/images/brand/logotype/nuva-logotype-colored-light.svg"
+                        alt="NUVA"
+                    />
+                    <img
+                        class="h-10 w-auto hidden dark:block"
+                        src="/images/brand/logotype/nuva-logotype-colored-dark.svg"
+                        alt="NUVA"
+                    />
+                </a>
+                <p class="text-foreground/40 text-sm leading-relaxed max-w-xs">
+                    Custom software and hardware for businesses with specific industry needs.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-foreground/30 mb-4">Navigation</h3>
+                <div class="flex flex-col gap-2.5">
+                    <a href="/projects" class="text-foreground/60 hover:text-foreground transition-colors duration-200 text-sm">Projects</a>
+                    <a href="/about" class="text-foreground/60 hover:text-foreground transition-colors duration-200 text-sm">About</a>
+                    <a href="/contact" class="text-foreground/60 hover:text-foreground transition-colors duration-200 text-sm">Contact</a>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-foreground/30 mb-4">Contact</h3>
+                <div class="flex flex-col gap-2.5">
+                    <a href="mailto:post@nuva.no" class="text-foreground/60 hover:text-foreground transition-colors duration-200 text-sm">post@nuva.no</a>
+                    <a href="tel:+4748173357" class="text-foreground/60 hover:text-foreground transition-colors duration-200 text-sm">+47 481 73 357</a>
+                    <p class="text-foreground/40 text-sm">Sandefjord, Norway</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <p class="text-center px-8 pt-8">Made with ❤️ and ☕️ in Sandefjord, Norway</p>
-    <p class="text-center px-8 py-4 opacity-50">&copy; {new Date().getFullYear()} NUVA AS</p>
+    <div class="border-t border-border/20">
+        <div class="max-w-screen-2xl mx-auto px-4 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-2">
+            <p class="text-foreground/30 text-xs">&copy; {new Date().getFullYear()} NUVA AS</p>
+            <p class="text-foreground/30 text-xs">Made with care in Sandefjord, Norway</p>
+        </div>
+    </div>
 </footer>

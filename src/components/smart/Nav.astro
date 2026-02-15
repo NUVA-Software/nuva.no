@@ -6,12 +6,12 @@ import Icon from "../dumb/Icon.astro";
 import { Menu, Search, X, Sun, Moon } from "lucide";
 ---
 
-<nav id="nav" class="font-paragraph">
-    <div class="fixed w-full top-0 right-0 left-0 backdrop-blur-md z-10 border-b border-b-border/10 bg-background/50">
-        <div class="px-4 md:px-8 max-w-screen-2xl mx-auto grid grid-cols-2 md:grid-cols-5">
+<nav id="nav" class="font-sans">
+    <div class="fixed w-full top-0 right-0 left-0 backdrop-blur-xl z-10 border-b border-border/30 bg-background/80">
+        <div class="px-4 md:px-8 max-w-screen-2xl mx-auto h-14 lg:h-16 flex items-center justify-between">
             <a
                 href="/"
-                class="py-2 w-full mr-auto flex gap-2 text-foreground items-center justify-start hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                class="flex gap-2 text-foreground items-center hover:text-primary-500 transition-colors duration-200"
             >
                 <span class="logo hidden dark:block w-8 md:w-10 h-auto text-current">
                     <Fragment set:html={logoDark} />
@@ -20,98 +20,86 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
                     <Fragment set:html={logoLight} />
                 </span>
             </a>
-            <div class="hidden md:flex gap-4 justify-start items-center md:col-span-2">
-                <a
-                    href="/projects"
-                    class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
-                    >Projects</a
-                >
-                <a
-                    href="/about"
-                    class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
-                    >About</a
-                >
-                <a
-                    href="/contact"
-                    class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
-                    >Contact</a
-                >
+
+            <div class="hidden md:flex gap-8 items-center absolute left-1/2 -translate-x-1/2">
+                <a href="/projects" class="text-foreground/60 hover:text-foreground transition-colors duration-200 text-[0.9rem]">Projects</a>
+                <a href="/about" class="text-foreground/60 hover:text-foreground transition-colors duration-200 text-[0.9rem]">About</a>
+                <a href="/contact" class="text-foreground/60 hover:text-foreground transition-colors duration-200 text-[0.9rem]">Contact</a>
             </div>
-            <div class="flex gap-4 justify-end items-center md:col-span-2">
+
+            <div class="flex gap-1 items-center">
                 <button
                     data-theme-toggle-trigger
                     title="Change theme"
                     type="button"
-                    class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                    class="w-9 h-9 flex items-center justify-center rounded-lg text-foreground/40 hover:text-foreground hover:bg-foreground/5 transition-all duration-200"
                 >
-                    <Icon class="dark:block hidden text-current" icon={Moon} />
-                    <Icon class="dark:hidden block text-current" icon={Sun} />
-                    <span class="hidden xl:block">Theme</span>
+                    <Icon class="dark:block hidden w-[18px] h-[18px]" icon={Moon} />
+                    <Icon class="dark:hidden block w-[18px] h-[18px]" icon={Sun} />
                 </button>
                 <button
                     data-search-open-trigger
                     title="Open search"
                     type="button"
-                    class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                    class="w-9 h-9 flex items-center justify-center rounded-lg text-foreground/40 hover:text-foreground hover:bg-foreground/5 transition-all duration-200"
                 >
-                    <Icon class="text-current" icon={Search} />
-                    <span class="hidden xl:block">Search</span>
+                    <Icon class="w-[18px] h-[18px]" icon={Search} />
                 </button>
                 <button
                     data-menu-open-trigger
                     title="Open menu"
                     type="button"
-                    class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                    class="md:hidden w-9 h-9 flex items-center justify-center rounded-lg text-foreground/40 hover:text-foreground hover:bg-foreground/5 transition-all duration-200"
                 >
-                    <Icon class="text-current" icon={Menu} />
-                    <span class="block">Menu</span>
+                    <Icon class="w-[18px] h-[18px]" icon={Menu} />
                 </button>
-                <div class="hidden lg:block">
-                    <Button size="sm" variant="primary" href="/contact">Contact</Button>
+                <div class="hidden md:block ml-2">
+                    <Button size="sm" variant="primary" href="/contact">Get in touch</Button>
                 </div>
             </div>
         </div>
     </div>
+
     <dialog
         data-nav-menu
         class="fixed inset-0 bg-transparent w-full h-screen z-10 open:flex flex-col justify-center items-center p-4"
     >
-        <div data-menu-close-trigger class="bg-background/50 backdrop-blur-md w-full h-full absolute inset-0"></div>
+        <div data-menu-close-trigger class="bg-background/80 backdrop-blur-xl w-full h-full absolute inset-0"></div>
 
         <a
             href="/"
-            class="relative mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+            class="relative mx-auto mb-auto pt-8 flex gap-2 text-foreground items-center justify-center hover:text-primary-500 transition-colors duration-200"
         >
-            <span class="logo hidden dark:block w-16 md:w-24 h-auto text-current">
+            <span class="logo hidden dark:block w-16 md:w-20 h-auto text-current">
                 <Fragment set:html={logoDark} />
             </span>
-            <span class="logo block dark:hidden w-16 md:w-24 h-auto text-current">
+            <span class="logo block dark:hidden w-16 md:w-20 h-auto text-current">
                 <Fragment set:html={logoLight} />
             </span>
         </a>
-        <div class="relative my-auto flex flex-col gap-4 text-center">
+        <div class="relative my-auto flex flex-col gap-6 text-center">
             <a
                 href="/projects"
-                class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                class="text-foreground text-2xl font-serif font-bold hover:text-primary-500 transition-colors duration-200"
                 >Projects</a
             >
             <a
                 href="/about"
-                class="text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                class="text-foreground text-2xl font-serif font-bold hover:text-primary-500 transition-colors duration-200"
                 >About</a
             >
-            <div>
-                <Button size="md" variant="primary" href="/contact">Contact</Button>
+            <div class="mt-2">
+                <Button size="md" variant="primary" href="/contact">Get in touch</Button>
             </div>
         </div>
-        <div class="relative mt-auto">
+        <div class="relative mt-auto pb-8">
             <button
                 data-menu-close-trigger
                 title="Close menu"
                 type="button"
-                class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                class="flex gap-2 items-center text-foreground/50 hover:text-foreground transition-colors duration-200"
             >
-                <Icon class="text-current" icon={X} />
+                <Icon class="w-5 h-5" icon={X} />
                 <span>Close</span>
             </button>
         </div>
@@ -120,32 +108,32 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
         data-nav-search
         class="fixed inset-0 bg-transparent w-full h-screen z-10 open:flex flex-col justify-center items-center p-4"
     >
-        <div data-search-close-trigger class="bg-background/50 backdrop-blur-md w-full h-full absolute inset-0"></div>
+        <div data-search-close-trigger class="bg-background/80 backdrop-blur-xl w-full h-full absolute inset-0"></div>
         <a
             href="/"
-            class="relative mx-auto mb-auto flex gap-2 text-foreground items-center justify-center hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+            class="relative mx-auto mb-auto pt-8 flex gap-2 text-foreground items-center justify-center hover:text-primary-500 transition-colors duration-200"
         >
-            <span class="logo hidden dark:block w-16 md:w-24 h-auto text-current">
+            <span class="logo hidden dark:block w-16 md:w-20 h-auto text-current">
                 <Fragment set:html={logoDark} />
             </span>
-            <span class="logo block dark:hidden w-16 md:w-24 h-auto text-current">
+            <span class="logo block dark:hidden w-16 md:w-20 h-auto text-current">
                 <Fragment set:html={logoLight} />
             </span>
         </a>
-        <form class="relative my-auto flex gap-2 text-center justify-center items-center" action="/search">
-            <input name="q" type="search" class="p-2 border-2 border-border" autofocus />
-            <button type="submit" class="text-foreground">
-                <Icon class="text-current" icon={Search} />
+        <form class="relative my-auto flex gap-3 text-center justify-center items-center w-full max-w-md px-4" action="/search">
+            <input name="q" type="search" class="w-full p-3 border border-border rounded-lg bg-background text-foreground" autofocus placeholder="Search..." />
+            <button type="submit" class="text-foreground p-3 rounded-lg hover:bg-foreground/5 transition-colors duration-200">
+                <Icon class="w-5 h-5" icon={Search} />
             </button>
         </form>
-        <div class="relative mt-auto">
+        <div class="relative mt-auto pb-8">
             <button
                 data-search-close-trigger
                 title="Close search"
                 type="button"
-                class="flex gap-1 items-center text-foreground hover:underline focus:underline hover:text-primary-500 focus:text-primary-500 dark:hover:text-primary-400 dark:focus:text-primary-400"
+                class="flex gap-2 items-center text-foreground/50 hover:text-foreground transition-colors duration-200"
             >
-                <Icon class="text-current" icon={X} />
+                <Icon class="w-5 h-5" icon={X} />
                 <span>Close</span>
             </button>
         </div>
@@ -174,9 +162,8 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
         const menuOpenButtons = document.querySelectorAll("[data-menu-open-trigger]");
         menuOpenButtons.forEach((button) => {
             button.addEventListener("click", () => {
-                console.debug("Opening nav menu dialog: Button clicked");
                 navMenuDialog.setAttribute("open", "");
-                // @ts-ignore - Focus method exists, stfu TS
+                // @ts-ignore
                 navMenuDialog.focus();
                 window.addEventListener("keydown", handleEscapeKey);
             });
@@ -185,9 +172,8 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
         const menuCloseButtons = document.querySelectorAll("[data-menu-close-trigger]");
         menuCloseButtons.forEach((button) => {
             button.addEventListener("click", () => {
-                console.debug("Closing nav menu dialog: Button clicked");
                 navMenuDialog.removeAttribute("open");
-                // @ts-ignore - Focus method exists, stfu TS
+                // @ts-ignore
                 menuOpenButtons[0].focus();
                 window.removeEventListener("keydown", handleEscapeKey);
             });
@@ -195,9 +181,8 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
 
         const handleEscapeKey = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
-                console.debug("Closing nav menu dialog: Escape key pressed");
                 navMenuDialog.removeAttribute("open");
-                // @ts-ignore - Focus method exists, stfu TS
+                // @ts-ignore
                 menuOpenButtons[0].focus();
                 window.removeEventListener("keydown", handleEscapeKey);
             }
@@ -218,7 +203,6 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
         const searchOpenButtons = document.querySelectorAll("[data-search-open-trigger]");
         searchOpenButtons.forEach((button) => {
             button.addEventListener("click", () => {
-                console.debug("Opening nav search dialog: Button clicked");
                 navSearchDialog.setAttribute("open", "");
                 searchInputElement.focus();
                 window.addEventListener("keydown", handleEscapeKey);
@@ -228,9 +212,8 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
         const searchCloseButtons = document.querySelectorAll("[data-search-close-trigger]");
         searchCloseButtons.forEach((button) => {
             button.addEventListener("click", () => {
-                console.debug("Closing nav search dialog: Button clicked");
                 navSearchDialog.removeAttribute("open");
-                // @ts-ignore - Focus method exists, stfu TS
+                // @ts-ignore
                 searchOpenButtons[0].focus();
                 window.removeEventListener("keydown", handleEscapeKey);
             });
@@ -238,9 +221,8 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
 
         const handleEscapeKey = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
-                console.debug("Closing nav search dialog: Escape key pressed");
                 navSearchDialog.removeAttribute("open");
-                // @ts-ignore - Focus method exists, stfu TS
+                // @ts-ignore
                 searchOpenButtons[0].focus();
                 window.removeEventListener("keydown", handleEscapeKey);
             }
@@ -253,7 +235,6 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
         const themeToggleButtons = document.querySelectorAll("[data-theme-toggle-trigger]");
         themeToggleButtons.forEach((button) => {
             button.addEventListener("click", () => {
-                console.debug("Toggling theme: Button clicked");
                 const savedTheme = localStorage.getItem("theme");
                 applyTheme(savedTheme === "light" ? "dark" : "light");
             });
@@ -272,7 +253,6 @@ import { Menu, Search, X, Sun, Moon } from "lucide";
         }
 
         function applyTheme(theme: "light" | "dark") {
-            console.debug(`Applying theme: ${theme}`);
             document.documentElement.classList.remove("dark");
             document.documentElement.classList.remove("light");
             document.documentElement.classList.add(theme);
